@@ -6,5 +6,13 @@
     <fragment
         android:id="@+id/principal"
         android:name="com.example.laboratorio8.views.Principal"
-        android:label="Principal" />
+        android:label="Principal" >
+        <action
+            android:id="@+id/action_principal_to_recyclerFragment"
+            app:destination="@id/recyclerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recyclerFragment"
+        android:name="com.example.laboratorio8.views.RecyclerFragment"
+        android:label="RecyclerFragment" />
 </navigation>

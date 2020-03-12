@@ -15,6 +15,7 @@ class PrincipalViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 
     private val _response = MutableLiveData<String>()
+
     var respod:String=""
     var valor:String=""
     var status = MutableLiveData<Boolean?>()
@@ -53,6 +54,8 @@ class PrincipalViewModel : ViewModel() {
                 if (response.body()?.login!=null){
                     _response.value = "Nombre usuario: "+response.body()?.login
                     _property.value=response.body()
+                    status.value=false
+
 
                 }else{
                     _response.value = "No existe"
