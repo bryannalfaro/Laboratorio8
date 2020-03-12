@@ -14,6 +14,7 @@ import com.example.laboratorio8.R
 import com.example.laboratorio8.viewModels.PrincipalViewModel
 import com.example.laboratorio8.databinding.PrincipalFragmentBinding
 import com.example.laboratorio8.redes.ApiService
+import kotlinx.android.synthetic.main.principal_fragment.*
 
 
 class Principal : Fragment() {
@@ -35,19 +36,20 @@ class Principal : Fragment() {
 
 
         binding.button.setOnClickListener {
-            viewModel.valor=binding.editText.text.toString()
+            viewModel.valort=binding.editText.text.toString()
             viewModel.getGithubProperties()
 
         }
+
         viewModel.status.observe(this, Observer { status ->
             status?.let {
                 viewModel.status.value = null
                 if(status==false){
                     binding.imageView.visibility=View.VISIBLE
                     binding.button2.visibility=View.VISIBLE
-                }else{
-                    binding.button2.visibility=View.GONE
+                }else if(status==true){
                     binding.imageView.visibility=View.GONE
+                    binding.button2.visibility=View.GONE
                     Toast.makeText(activity,"No se pudo encontrar un usuario con ese nombre",Toast.LENGTH_SHORT).show()
                 }
 
@@ -56,7 +58,12 @@ class Principal : Fragment() {
         })
 
         binding.button2.setOnClickListener {
-        view!!.findNavController().navigate(R.id.action_principal_to_recyclerFragment)
+            var comment=editText.text.toString()
+            binding.editText.text.clear()
+            binding.imageView.visibility=View.GONE
+
+            var bundle1= bundleOf("comentario" to comment)
+        view!!.findNavController().navigate(R.id.action_principal_to_recyclerFragment,bundle1)
         }
 
         return binding.root

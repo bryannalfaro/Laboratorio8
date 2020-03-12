@@ -29,7 +29,7 @@ class RecyclerViewModel : ViewModel() {
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
      */
     init {
-        getReposProperties()
+
     }
 
     /**
@@ -38,7 +38,7 @@ class RecyclerViewModel : ViewModel() {
      */
     public fun getReposProperties() {
 
-        ApiServices.retrofitService.getPropertiesRepo().enqueue(object : retrofit2.Callback<List<ReposProperty>>{
+        ApiServices.retrofitService.getPropertiesRepo(valor).enqueue(object : retrofit2.Callback<List<ReposProperty>>{
             override fun onFailure(call: Call<List<ReposProperty>>, t: Throwable) {
                 Log.i("Fallo","${t.message}")//To change body of created functions use File | Settings | File Templates.
             }

@@ -17,7 +17,7 @@ class PrincipalViewModel : ViewModel() {
     private val _response = MutableLiveData<String>()
 
     var respod:String=""
-    var valor:String=""
+    var valort:String=""
     var status = MutableLiveData<Boolean?>()
 
     private val _property = MutableLiveData<GitProperty>()
@@ -43,7 +43,7 @@ class PrincipalViewModel : ViewModel() {
      * Mars properties retrieved.
      */
     public fun getGithubProperties() {
-        ApiServices.retrofitService.getProperties(valor).enqueue( object: retrofit2.Callback<GitProperty> {
+        ApiServices.retrofitService.getProperties(valort).enqueue( object: retrofit2.Callback<GitProperty> {
             override fun onFailure(call: Call<GitProperty>, t: Throwable) {
                 _response.value = "Error " + t.message
             }

@@ -9,7 +9,8 @@
         android:label="Principal" >
         <action
             android:id="@+id/action_principal_to_recyclerFragment"
-            app:destination="@id/recyclerFragment" />
+            app:destination="@id/recyclerFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/recyclerFragment"

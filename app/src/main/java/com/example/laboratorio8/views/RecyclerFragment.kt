@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,11 +43,15 @@ class RecyclerFragment : Fragment() {
 
 
         RecyclerView=bindin.recycler
-
+        var strings=arguments?.getString("comentario")
+        Toast.makeText(activity,"$strings",Toast.LENGTH_SHORT).show()
 
         RecyclerView.adapter=adaptador
-        RecyclerView.layoutManager= LinearLayoutManager(context)
+        RecyclerView.layoutManager= LinearLayoutManager(context) as RecyclerView.LayoutManager?
         bindin.lifecycleOwner=viewLifecycleOwner
+
+        viewModel.valor= strings.toString()
+        viewModel.getReposProperties()
 
         viewModel.responsa.observe(this, Observer {
             listas=it
