@@ -1,5 +1,6 @@
 package com.example.laboratorio8.viewModels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +12,7 @@ import retrofit2.Response
 
 class RecyclerViewModel : ViewModel() {
     // TODO: Implement the ViewModel
-    private var _response = ArrayList<ArrayList<ReposProperty>>()
+    private var _response = MutableLiveData<List<ReposProperty>>()
 
 
     var valor:String="bryannalfaro"
@@ -21,7 +22,7 @@ class RecyclerViewModel : ViewModel() {
 
 
     // The external immutable LiveData for the response String
-    val responsa: ArrayList<ArrayList<ReposProperty>>
+    val responsa: LiveData<List<ReposProperty>>
         get() = _response
 
     /**
@@ -37,16 +38,17 @@ class RecyclerViewModel : ViewModel() {
      */
     public fun getReposProperties() {
 
-        ApiServices.retrofitService.getPropertiesRepo(valor).enqueue(object : retrofit2.Callback<ArrayList<ArrayList<ReposProperty>>>{
-            override fun onFailure(call: Call<ArrayList<ArrayList<ReposProperty>>>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        ApiServices.retrofitService.getPropertiesRepo().enqueue(object : retrofit2.Callback<List<ReposProperty>>{
+            override fun onFailure(call: Call<List<ReposProperty>>, t: Throwable) {
+                Log.i("Fallo","${t.message}")//To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onResponse(
-                call: Call<ArrayList<ArrayList<ReposProperty>>>,
-                response: Response<ArrayList<ArrayList<ReposProperty>>>
+                call: Call<List<ReposProperty>>,
+                response: Response<List<ReposProperty>>
             ) {
-                _response=response.body()!!
+                Log.i("ENTRO","${response.body()!!.get(0).name}")
+                _response.value=response.body()!!
             }
 
         })

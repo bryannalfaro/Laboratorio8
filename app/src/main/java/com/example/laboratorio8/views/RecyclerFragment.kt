@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.laboratorio8.Adapter
 import com.example.laboratorio8.R
 import com.example.laboratorio8.databinding.RecyclerFragmentBinding
+import com.example.laboratorio8.redes.ReposProperty
 import com.example.laboratorio8.viewModels.RecyclerViewModel
 
 
@@ -24,6 +26,7 @@ class RecyclerFragment : Fragment() {
 
     private lateinit var viewModel: RecyclerViewModel
     private lateinit var bindin: RecyclerFragmentBinding
+    private lateinit var listas:List<ReposProperty>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +35,7 @@ class RecyclerFragment : Fragment() {
         bindin= DataBindingUtil.inflate(inflater,
             R.layout.recycler_fragment,container,false)
         var RecyclerView: RecyclerView
+
 
         var adaptador= Adapter(context!!)
         viewModel= ViewModelProviders.of(activity!!).get(RecyclerViewModel::class.java)
@@ -42,9 +46,14 @@ class RecyclerFragment : Fragment() {
 
         RecyclerView.adapter=adaptador
         RecyclerView.layoutManager= LinearLayoutManager(context)
+        bindin.lifecycleOwner=viewLifecycleOwner
+
+        viewModel.responsa.observe(this, Observer {
+            listas=it
+            adaptador.setQuestions(listas)
+        })
 
 
-        adaptador.setQuestions(viewModel.responsa)
 
 
         return bindin.root

@@ -29,9 +29,9 @@ interface ApiService {
     fun getProperties(@Path("valors") valors: String?):
             Call<GitProperty>
 
-    @GET("/users/{valors}/repos")
-    fun getPropertiesRepo(@Path("valors") valors: String?):
-            Call<ArrayList<ArrayList<ReposProperty>>>
+    @GET("/users/bryannalfaro/repos")
+    fun getPropertiesRepo():
+            Call<List<ReposProperty>>
 }
 
 object ApiServices{
