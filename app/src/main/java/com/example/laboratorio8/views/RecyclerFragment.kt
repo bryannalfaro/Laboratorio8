@@ -17,13 +17,12 @@ import com.example.laboratorio8.databinding.RecyclerFragmentBinding
 import com.example.laboratorio8.redes.ReposProperty
 import com.example.laboratorio8.viewModels.RecyclerViewModel
 
+/**
+ * Fragment for the RecyclerView
+ * @author Bryann Alfaro
+ */
+class RecyclerFragment : Fragment(){
 
-class RecyclerFragment : Fragment() {
-
-
-    companion object {
-        fun newInstance() = RecyclerFragment()
-    }
 
     private lateinit var viewModel: RecyclerViewModel
     private lateinit var bindin: RecyclerFragmentBinding
@@ -52,14 +51,14 @@ class RecyclerFragment : Fragment() {
 
         viewModel.valor= strings.toString()
         viewModel.getReposProperties()
+        if (viewModel.brt==true){
+
+        }
 
         viewModel.responsa.observe(this, Observer {
             listas=it
-            adaptador.setQuestions(listas)
+            adaptador.setRepos(listas)
         })
-
-
-
 
         return bindin.root
     }
@@ -67,7 +66,11 @@ class RecyclerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(RecyclerViewModel::class.java)
-        // TODO: Use the ViewModel
+
     }
+
+
+
+
 
 }
