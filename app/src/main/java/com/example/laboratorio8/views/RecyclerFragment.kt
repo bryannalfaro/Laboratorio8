@@ -42,7 +42,7 @@ class RecyclerFragment : Fragment(){
 
 
         RecyclerView=bindin.recycler
-        var strings=arguments?.getString("comentario")
+        var strings=arguments?.getString("nombre")
         Toast.makeText(activity,"$strings",Toast.LENGTH_SHORT).show()
 
         RecyclerView.adapter=adaptador

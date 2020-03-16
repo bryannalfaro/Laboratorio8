@@ -79,7 +79,7 @@ class Principal : Fragment() {
 
                     binding.button2.visibility=View.GONE
 
-                    var bundle1= bundleOf("comentario" to comment)
+                    var bundle1= bundleOf("nombre" to comment)
                     view!!.findNavController().navigate(R.id.action_principal_to_recyclerFragment,bundle1)
                     boolean=true
                 }
