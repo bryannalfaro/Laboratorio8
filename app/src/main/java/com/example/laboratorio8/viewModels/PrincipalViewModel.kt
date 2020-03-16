@@ -14,36 +14,36 @@ import retrofit2.Response
  */
 class PrincipalViewModel : ViewModel() {
 
-    private val _response = MutableLiveData<String>()
+    private val _responseReceived = MutableLiveData<String>()
     var valort:String=""
     var status = MutableLiveData<Boolean?>()
 
-    private val _property = MutableLiveData<GitPropertyClass>()
+    private val _propertyGit = MutableLiveData<GitPropertyClass>()
 
     val property: LiveData<GitPropertyClass>
-        get() = _property
+        get() = _propertyGit
 
     //Response of the GitProperty
     val responsa: LiveData<String>
-        get() = _response
+        get() = _responseReceived
 
-    fun getGithubProperties() {
+    fun getGithubPropertiesFromJson() {
         ApiServices.retrofitService.getProperties(valort).enqueue( object: retrofit2.Callback<GitPropertyClass> {
             override fun onFailure(call: Call<GitPropertyClass>, t: Throwable) {
-                _response.value = "Error " + t.message
+                _responseReceived.value = "Error " + t.message
             }
 
             override fun onResponse(call: Call<GitPropertyClass>, response: Response<GitPropertyClass>){
 
-                _response.value = "Nombre usuario: "+response.body()?.login
+                _responseReceived.value = "Nombre usuario: "+response.body()?.login
                 if (response.body()?.login!=null){
-                    _response.value = "Nombre usuario: "+response.body()?.login
-                    _property.value=response.body()
+                    _responseReceived.value = "Nombre usuario: "+response.body()?.login
+                    _propertyGit.value=response.body()
                     status.value=false
 
 
                 }else{
-                    _response.value = "No existe"
+                    _responseReceived.value = "No existe"
                     status.value = true
                 }
             }

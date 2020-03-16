@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -14,7 +13,6 @@ import androidx.navigation.findNavController
 import com.example.laboratorio8.R
 import com.example.laboratorio8.viewModels.PrincipalViewModel
 import com.example.laboratorio8.databinding.PrincipalFragmentBinding
-import com.example.laboratorio8.redes.ApiService
 import kotlinx.android.synthetic.main.principal_fragment.*
 
 /**
@@ -42,7 +40,7 @@ class Principal : Fragment() {
         //For the search button
         binding.button.setOnClickListener {
             viewModel.valort=binding.editText.text.toString()
-            viewModel.getGithubProperties()
+            viewModel.getGithubPropertiesFromJson()
 
         }
 
